@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "258429633557",
+    "firebase_url": "https://ait-attendance-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ait-attendance",
+    "storage_bucket": "ait-attendance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258429633557:android:974cdd25c8fe3bc3793a1c",
+        "android_client_info": {
+          "package_name": "com.ishuinzu.aitattendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258429633557-rbofh256d6cr8810jr01oqpsbplnv8rp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ishuinzu.aitattendance",
+            "certificate_hash": "a7859cfa8c1ce21fe8ef89757d2b70a3e02c34d6"
+          }
+        },
+        {
+          "client_id": "258429633557-ltrod2g5eivrvj8uacp41hpnumu8n5r8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd4Qvtp-blEvEH4GwBguZQfcDeG3ETuKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258429633557-ltrod2g5eivrvj8uacp41hpnumu8n5r8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

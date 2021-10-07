@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.CropImageActivity">
+
+    <com.isseiaoki.simplecropview.CropImageView
+        android:id="@+id/cropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_weight="1"
+        custom:scv_background_color="@color/black"
+        custom:scv_crop_mode="fit_image"
+        custom:scv_frame_color="@color/primary_200"
+        custom:scv_frame_stroke_weight="1dp"
+        custom:scv_guide_color="@color/primary_700"
+        custom:scv_guide_show_mode="show_always"
+        custom:scv_guide_stroke_weight="1dp"
+        custom:scv_handle_color="@color/primary_700"
+        custom:scv_handle_show_mode="show_always"
+        custom:scv_handle_size="12dp"
+        custom:scv_min_frame_size="32dp"
+        custom:scv_overlay_color="@color/black"
+        custom:scv_touch_padding="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCropImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/primary_700"
+        android:text="Crop"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ishuinzu.aitattendance">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="scopedStorage" />
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@drawable/img_logo_rounded"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/img_logo_rounded"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AITAttendance"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <activity
+            android:name=".ui.AddStudentActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ForgetPasswordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.SMSInitializationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.UpdateTeacherActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.UpdateHODActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.SendSMSActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ManageDepartmentsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ManageTeachersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ManageHODsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.DashboardTeacherActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.DashboardHODActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.DashboardAdminActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.LoginTeacherActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.TeacherDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.SignupTeacherActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.LoginHODActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.HODDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.SignupHODActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.CropImageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.LoginAdministratorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ConfigAdministratorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.UserTypeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
