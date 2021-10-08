@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AIT Attendance</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="sms_api">793bba3b087f696e2def123dc0f0dbc6</string>
 </resources>

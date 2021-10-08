@@ -20,73 +20,117 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:baselineAligned="false"
             android:gravity="center"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:ellipsize="end"
-                android:fontFamily="@font/comfortaa_bold"
-                android:maxLines="1"
-                android:text="Name"
-                android:textColor="@color/text_color"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtRollNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:ellipsize="end"
-                android:fontFamily="@font/comfortaa"
-                android:maxLines="2"
-                android:text="1111"
-                android:textColor="@color/text_color"
-                android:textSize="12sp" />
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:weightSum="7">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/comfortaa_bold"
+                    android:maxLines="1"
+                    android:text="Name"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtRollNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/comfortaa"
+                    android:maxLines="2"
+                    android:text="1111"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="16dp"
+                android:layout_weight="3"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-                <ImageView
-                    android:id="@+id/btnUpdate"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="4dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:src="@drawable/btn_update"
-                    tools:ignore="contentDescription" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    tools:ignore="NestedWeights">
 
-                <ImageView
-                    android:id="@+id/btnDelete"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="4dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:src="@drawable/btn_delete"
-                    tools:ignore="contentDescription" />
+                    <ImageView
+                        android:id="@+id/btnUpdate"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="4dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:src="@drawable/btn_update"
+                        tools:ignore="contentDescription" />
 
-                <ImageView
-                    android:id="@+id/btnMessage"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="4dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:src="@drawable/btn_message"
-                    tools:ignore="contentDescription" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    tools:ignore="NestedWeights">
+
+                    <ImageView
+                        android:id="@+id/btnDelete"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="4dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:src="@drawable/btn_delete"
+                        tools:ignore="contentDescription" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    tools:ignore="NestedWeights">
+
+                    <ImageView
+                        android:id="@+id/btnMessage"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="4dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:src="@drawable/btn_message"
+                        tools:ignore="contentDescription" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

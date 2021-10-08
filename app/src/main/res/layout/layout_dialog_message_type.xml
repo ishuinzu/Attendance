@@ -27,6 +27,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/comfortaa_bold"
             android:maxLines="1"
+            android:textColor="@color/text_color"
             android:text="Send SMS" />
 
         <com.google.android.material.textfield.TextInputLayout

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".ui.AddStudentActivity">
+    tools:context=".ui.UpdateStudentActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/comfortaa_bold"
-                    android:text="Add Student"
+                    android:text="Update Student"
                     android:textColor="@color/text_color"
                     android:textSize="24sp" />
 
@@ -209,7 +209,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardAddStudent"
+                android:id="@+id/cardUpdateStudent"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -236,7 +236,7 @@
                         android:ellipsize="end"
                         android:fontFamily="@font/comfortaa_bold"
                         android:maxLines="1"
-                        android:text="Add Student"
+                        android:text="Update"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="16sp" />

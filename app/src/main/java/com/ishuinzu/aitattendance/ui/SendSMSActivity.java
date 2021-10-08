@@ -2,10 +2,16 @@ package com.ishuinzu.aitattendance.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,6 +28,7 @@ import com.ishuinzu.aitattendance.R;
 import com.ishuinzu.aitattendance.adapter.StudentAdapter;
 import com.ishuinzu.aitattendance.databinding.ActivitySendSmsBinding;
 import com.ishuinzu.aitattendance.dialog.LoadingDialog;
+import com.ishuinzu.aitattendance.object.MessageType;
 import com.ishuinzu.aitattendance.object.Student;
 
 import java.util.ArrayList;
@@ -34,6 +42,9 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
     private List<Boolean> selections;
     private List<Student> students;
     private StudentAdapter studentAdapter;
+    private List<String> messageTypeNames;
+    private ArrayAdapter<String> messageTypesArrayAdapter;
+    private String messageType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +68,7 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
 
         // Click Listener
         binding.btnCloseScreen.setOnClickListener(this);
+        binding.cardSendAll.setOnClickListener(this);
 
         // Sent Message Permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -77,6 +89,95 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
                 // Close Screen
                 finish();
                 break;
+
+            case R.id.cardSendAll:
+                // Send All
+                sendAll();
+                break;
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void sendAll() {
+        if (students.size() != 0) {
+            // Message Dialog
+            Dialog dialog = new Dialog(SendSMSActivity.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.layout_dialog_message_type);
+            dialog.setCancelable(true);
+
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+            layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+            layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+            AutoCompleteTextView selectMessageType = dialog.findViewById(R.id.selectMessageType);
+            TextInputEditText edtMessage = dialog.findViewById(R.id.edtMessage);
+            selectMessageType.setOnItemClickListener((adapterView, view12, i, l) -> {
+                messageType = messageTypeNames.get(i);
+                dialog.findViewById(R.id.edtMessageLayout).setEnabled(!messageType.equals("Select Message Type"));
+            });
+            (dialog.findViewById(R.id.btnCancel)).setOnClickListener(view1 -> dialog.dismiss());
+            (dialog.findViewById(R.id.btnSend)).setOnClickListener(view13 -> {
+                if (!messageType.equals("Select Message Type")) {
+                    String message = edtMessage.getText().toString();
+                    if (!message.isEmpty()) {
+                        // Send SMS
+                        for (Student student : students) {
+                            try {
+                                SmsManager smsManager = SmsManager.getDefault();
+                                smsManager.sendTextMessage(student.getFather_phone_number(), null, messageType + "\n\n" + message, null, null);
+                                Toast.makeText(SendSMSActivity.this, "Done", Toast.LENGTH_LONG).show();
+                            } catch (Exception e) {
+                                Toast.makeText(SendSMSActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                e.printStackTrace();
+                            }
+                        }
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(SendSMSActivity.this, "Message Required", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(SendSMSActivity.this, "Message Type Required", Toast.LENGTH_SHORT).show();
+                }
+            });
+            messageTypeNames = new ArrayList<>();
+            messageTypesArrayAdapter = new ArrayAdapter<>(SendSMSActivity.this, R.layout.item_drop_down, R.id.txtItem, messageTypeNames);
+            selectMessageType.setAdapter(messageTypesArrayAdapter);
+
+            FirebaseDatabase.getInstance().getReference().child("message_type")
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                messageTypeNames.clear();
+                                messageTypeNames.add("Select Message Type");
+
+                                if (snapshot.getChildrenCount() != 0) {
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        MessageType messageType = dataSnapshot.getValue(MessageType.class);
+
+                                        if (messageType != null) {
+                                            messageTypeNames.add(messageType.getName());
+                                        }
+                                    }
+                                    dialog.findViewById(R.id.selectMessageTypeLayout).setEnabled(true);
+                                    messageTypesArrayAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+            dialog.getWindow().setAttributes(layoutParams);
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
+            dialog.show();
+        } else {
+            Toast.makeText(SendSMSActivity.this, "No Student Found", Toast.LENGTH_SHORT).show();
         }
     }
 
