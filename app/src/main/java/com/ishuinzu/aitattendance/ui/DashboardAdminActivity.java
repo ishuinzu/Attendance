@@ -1,8 +1,5 @@
 package com.ishuinzu.aitattendance.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -10,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.ishuinzu.aitattendance.R;
@@ -41,6 +41,7 @@ public class DashboardAdminActivity extends AppCompatActivity implements View.On
         binding.cardManageTeachers.setOnClickListener(this);
         binding.cardManageDepartments.setOnClickListener(this);
         binding.cardSendSMS.setOnClickListener(this);
+        binding.cardSMSHistory.setOnClickListener(this);
         binding.cardDarkMode.setOnClickListener(this);
         binding.btnLogout.setOnClickListener(this);
 
@@ -72,6 +73,11 @@ public class DashboardAdminActivity extends AppCompatActivity implements View.On
             case R.id.cardSendSMS:
                 // Send Initialization
                 startActivity(new Intent(DashboardAdminActivity.this, SMSInitializationActivity.class));
+                break;
+
+            case R.id.cardSMSHistory:
+                // SMS History
+                startActivity(new Intent(DashboardAdminActivity.this, SMSHistoryActivity.class));
                 break;
 
             case R.id.cardDarkMode:

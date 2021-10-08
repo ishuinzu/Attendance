@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,9 +28,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ishuinzu.aitattendance.R;
 import com.ishuinzu.aitattendance.adapter.StudentAdapter;
+import com.ishuinzu.aitattendance.app.Preferences;
+import com.ishuinzu.aitattendance.app.Utils;
 import com.ishuinzu.aitattendance.databinding.ActivitySendSmsBinding;
 import com.ishuinzu.aitattendance.dialog.LoadingDialog;
 import com.ishuinzu.aitattendance.object.MessageType;
+import com.ishuinzu.aitattendance.object.SMS;
 import com.ishuinzu.aitattendance.object.Student;
 
 import java.util.ArrayList;
@@ -127,7 +132,36 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
                             try {
                                 SmsManager smsManager = SmsManager.getDefault();
                                 smsManager.sendTextMessage(student.getFather_phone_number(), null, messageType + "\n\n" + message, null, null);
-                                Toast.makeText(SendSMSActivity.this, "Done", Toast.LENGTH_LONG).show();
+
+                                // Save Message To Database
+                                SMS sms = new SMS();
+                                sms.setAddress(student.getAddress());
+                                sms.setBy_name(Preferences.getInstance(SendSMSActivity.this).getName());
+                                sms.setBy_type(Preferences.getInstance(SendSMSActivity.this).getType());
+                                sms.setDepartment(student.getDepartment());
+                                sms.setCreation(System.currentTimeMillis());
+                                sms.setName(student.getName());
+                                sms.setFather_name(student.getFather_name());
+                                sms.setMessage_text(message);
+                                sms.setSection(student.getSection());
+                                sms.setRoll_number(student.getRoll_number());
+                                sms.setFather_phone_number(student.getFather_phone_number());
+                                sms.setMessage_type(messageType);
+
+                                FirebaseDatabase.getInstance().getReference().child("sms")
+                                        .child(Utils.getDateID())
+                                        .child(student.getDepartment())
+                                        .child(student.getSection().replaceAll("\\s+", ""))
+                                        .child("" + sms.getCreation())
+                                        .setValue(sms)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(SendSMSActivity.this, "Done", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
                             } catch (Exception e) {
                                 Toast.makeText(SendSMSActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                                 e.printStackTrace();

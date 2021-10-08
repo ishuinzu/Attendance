@@ -162,6 +162,18 @@ public class Preferences {
         return sharedPreferences.getString(TYPE, null);
     }
 
+    public String getName() {
+        switch (getType()) {
+            case "ADMIN":
+                return sharedPreferences.getString(ADMIN_NAME, null);
+            case "HOD":
+                return sharedPreferences.getString(HOD_NAME, null);
+            case "TEACHER":
+                return sharedPreferences.getString(TEACHER_NAME, null);
+        }
+        return null;
+    }
+
     public String getHODDepartment() {
         return sharedPreferences.getString(HOD_DEPARTMENT, null);
     }

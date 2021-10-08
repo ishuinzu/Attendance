@@ -21,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
@@ -28,8 +30,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ishuinzu.aitattendance.R;
+import com.ishuinzu.aitattendance.app.Preferences;
+import com.ishuinzu.aitattendance.app.Utils;
 import com.ishuinzu.aitattendance.dialog.LoadingDialog;
 import com.ishuinzu.aitattendance.object.MessageType;
+import com.ishuinzu.aitattendance.object.SMS;
 import com.ishuinzu.aitattendance.object.Student;
 import com.ishuinzu.aitattendance.ui.UpdateStudentActivity;
 
@@ -158,7 +163,36 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
                         try {
                             SmsManager smsManager = SmsManager.getDefault();
                             smsManager.sendTextMessage(students.get(position).getFather_phone_number(), null, messageType + "\n\n" + message, null, null);
-                            Toast.makeText(context, "Done", Toast.LENGTH_LONG).show();
+
+                            // Save Message To Database
+                            SMS sms = new SMS();
+                            sms.setAddress(students.get(position).getAddress());
+                            sms.setBy_name(Preferences.getInstance(context).getName());
+                            sms.setBy_type(Preferences.getInstance(context).getType());
+                            sms.setDepartment(students.get(position).getDepartment());
+                            sms.setCreation(System.currentTimeMillis());
+                            sms.setName(students.get(position).getName());
+                            sms.setFather_name(students.get(position).getFather_name());
+                            sms.setMessage_text(message);
+                            sms.setSection(students.get(position).getSection());
+                            sms.setRoll_number(students.get(position).getRoll_number());
+                            sms.setFather_phone_number(students.get(position).getFather_phone_number());
+                            sms.setMessage_type(messageType);
+
+                            FirebaseDatabase.getInstance().getReference().child("sms")
+                                    .child(Utils.getDateID())
+                                    .child(students.get(position).getDepartment())
+                                    .child(students.get(position).getSection().replaceAll("\\s+", ""))
+                                    .child("" + sms.getCreation())
+                                    .setValue(sms)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(context, "Done", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
                         } catch (Exception e) {
                             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
