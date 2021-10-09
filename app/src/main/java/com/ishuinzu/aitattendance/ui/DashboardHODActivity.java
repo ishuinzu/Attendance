@@ -46,6 +46,7 @@ public class DashboardHODActivity extends AppCompatActivity implements View.OnCl
         // Click Listener
         binding.cardManageTeachers.setOnClickListener(this);
         binding.cardSendSMS.setOnClickListener(this);
+        binding.cardSMSHistory.setOnClickListener(this);
         binding.cardDarkMode.setOnClickListener(this);
         binding.btnLogout.setOnClickListener(this);
 
@@ -73,6 +74,16 @@ public class DashboardHODActivity extends AppCompatActivity implements View.OnCl
                 if (hod.getIs_verified()) {
                     // SMS Initialization
                     startActivity(new Intent(DashboardHODActivity.this, SMSInitializationActivity.class));
+                } else {
+                    // Show Dialog
+                    showVerificationDialog();
+                }
+                break;
+
+            case R.id.cardSMSHistory:
+                if (hod.getIs_verified()) {
+                    // SMS History
+                    startActivity(new Intent(DashboardHODActivity.this, SMSHistoryActivity.class));
                 } else {
                     // Show Dialog
                     showVerificationDialog();

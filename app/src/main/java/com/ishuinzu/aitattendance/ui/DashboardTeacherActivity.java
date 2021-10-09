@@ -45,6 +45,7 @@ public class DashboardTeacherActivity extends AppCompatActivity implements View.
 
         // Click Listener
         binding.cardSendSMS.setOnClickListener(this);
+        binding.cardSMSHistory.setOnClickListener(this);
         binding.cardDarkMode.setOnClickListener(this);
         binding.btnLogout.setOnClickListener(this);
 
@@ -64,59 +65,17 @@ public class DashboardTeacherActivity extends AppCompatActivity implements View.
                     startActivity(new Intent(DashboardTeacherActivity.this, SMSInitializationActivity.class));
                 } else {
                     // Show Dialog
-                    Dialog dialog = new Dialog(DashboardTeacherActivity.this);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(R.layout.layout_dialog_verification);
-                    dialog.setCancelable(true);
+                    showConfirmationDialog();
+                }
+                break;
 
-                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-                    layoutParams.copyFrom(dialog.getWindow().getAttributes());
-                    layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-                    layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-                    TextView txtVerificationStatus = dialog.findViewById(R.id.txtVerificationStatus);
-                    (dialog.findViewById(R.id.btnCancel)).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialog.dismiss();
-                        }
-                    });
-                    (dialog.findViewById(R.id.btnCheckNow)).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            // Check Verification Status
-                            FirebaseDatabase.getInstance().getReference().child("teacher")
-                                    .child(teacher.getId())
-                                    .get()
-                                    .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                        @SuppressLint("SetTextI18n")
-                                        @Override
-                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                if (task.getResult() != null) {
-                                                    teacher = task.getResult().getValue(Teacher.class);
-
-                                                    if (teacher != null) {
-                                                        if (teacher.getIs_verified()) {
-                                                            txtVerificationStatus.setText("Verified");
-                                                            Toast.makeText(DashboardTeacherActivity.this, "Verified", Toast.LENGTH_SHORT).show();
-                                                        } else {
-                                                            txtVerificationStatus.setText("Unverified");
-                                                            Toast.makeText(DashboardTeacherActivity.this, "Unverified", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                        Preferences.getInstance(DashboardTeacherActivity.this).setTeacher(teacher);
-                                                        dialog.dismiss();
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    });
-                        }
-                    });
-
-                    dialog.getWindow().setAttributes(layoutParams);
-                    dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
-                    dialog.show();
+            case R.id.cardSMSHistory:
+                if (teacher.getIs_verified()) {
+                    // SMS History
+                    startActivity(new Intent(DashboardTeacherActivity.this, SMSHistoryActivity.class));
+                } else {
+                    // Show Dialog
+                    showConfirmationDialog();
                 }
                 break;
 
@@ -165,5 +124,61 @@ public class DashboardTeacherActivity extends AppCompatActivity implements View.
                 dialog.show();
                 break;
         }
+    }
+
+    private void showConfirmationDialog() {
+        Dialog dialog = new Dialog(DashboardTeacherActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_dialog_verification);
+        dialog.setCancelable(true);
+
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        TextView txtVerificationStatus = dialog.findViewById(R.id.txtVerificationStatus);
+        (dialog.findViewById(R.id.btnCancel)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        (dialog.findViewById(R.id.btnCheckNow)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Check Verification Status
+                FirebaseDatabase.getInstance().getReference().child("teacher")
+                        .child(teacher.getId())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @SuppressLint("SetTextI18n")
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    if (task.getResult() != null) {
+                                        teacher = task.getResult().getValue(Teacher.class);
+
+                                        if (teacher != null) {
+                                            if (teacher.getIs_verified()) {
+                                                txtVerificationStatus.setText("Verified");
+                                                Toast.makeText(DashboardTeacherActivity.this, "Verified", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                txtVerificationStatus.setText("Unverified");
+                                                Toast.makeText(DashboardTeacherActivity.this, "Unverified", Toast.LENGTH_SHORT).show();
+                                            }
+                                            Preferences.getInstance(DashboardTeacherActivity.this).setTeacher(teacher);
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                }
+                            }
+                        });
+            }
+        });
+
+        dialog.getWindow().setAttributes(layoutParams);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
+        dialog.show();
     }
 }
