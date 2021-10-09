@@ -24,10 +24,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ishuinzu.aitattendance.R;
-import com.ishuinzu.aitattendance.ui.UpdateHODActivity;
 import com.ishuinzu.aitattendance.app.GlideApp;
+import com.ishuinzu.aitattendance.app.Preferences;
 import com.ishuinzu.aitattendance.dialog.LoadingDialog;
 import com.ishuinzu.aitattendance.object.HOD;
+import com.ishuinzu.aitattendance.ui.UpdateHODActivity;
 
 import java.util.List;
 
@@ -106,9 +107,16 @@ public class HODAdapter extends RecyclerView.Adapter<HODAdapter.ViewHolder> {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
+                                                        // Config HOD[Department] -> false
+                                                        FirebaseDatabase.getInstance().getReference().child("config").child("hods").child("hod" + hods.get(position).getDepartment()).setValue(false);
                                                         // Delete Data
                                                         FirebaseDatabase.getInstance().getReference().child("hod").child(hods.get(position).getId()).removeValue();
                                                         Toast.makeText(context, "Profile Deleted", Toast.LENGTH_SHORT).show();
+
+                                                        // Login User Again
+                                                        String email = Preferences.getInstance(context).getEmail();
+                                                        String password = Preferences.getInstance(context).getPassword();
+                                                        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password);
 
                                                         // Close Loading
                                                         LoadingDialog.closeDialog();

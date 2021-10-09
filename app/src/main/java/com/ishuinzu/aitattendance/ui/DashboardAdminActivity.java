@@ -71,7 +71,7 @@ public class DashboardAdminActivity extends AppCompatActivity implements View.On
                 break;
 
             case R.id.cardSendSMS:
-                // Send Initialization
+                // SMS Initialization
                 startActivity(new Intent(DashboardAdminActivity.this, SMSInitializationActivity.class));
                 break;
 

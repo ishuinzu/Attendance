@@ -51,7 +51,30 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/comfortaa"
                     android:maxLines="2"
-                    android:text="1111"
+                    android:text="020202020"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/txtDepartment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/comfortaa"
+                    android:maxLines="2"
+                    android:text="Department : -----"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/txtSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/comfortaa"
+                    android:maxLines="2"
+                    android:text="Section : -----"
                     android:textColor="@color/text_color"
                     android:textSize="10sp" />
 
@@ -59,7 +82,6 @@
                     android:id="@+id/txtBy"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/comfortaa"
                     android:maxLines="2"
@@ -86,6 +108,17 @@
                     android:fontFamily="@font/comfortaa"
                     android:maxLines="3"
                     android:text="Message : ----"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/txtDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/comfortaa"
+                    android:maxLines="3"
+                    android:text="Date - Time : ----"
                     android:textColor="@color/text_color"
                     android:textSize="10sp" />
 
@@ -119,6 +152,15 @@
                         android:focusable="true"
                         android:src="@drawable/btn_delete"
                         tools:ignore="contentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/comfortaa"
+                        android:maxLines="1"
+                        android:text="Delete"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 

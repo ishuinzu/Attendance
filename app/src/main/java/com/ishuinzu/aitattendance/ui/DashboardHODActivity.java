@@ -1,7 +1,5 @@
 package com.ishuinzu.aitattendance.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -9,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.ishuinzu.aitattendance.R;
@@ -38,6 +39,7 @@ public class DashboardHODActivity extends AppCompatActivity implements View.OnCl
         // Click Listener
         binding.cardManageTeachers.setOnClickListener(this);
         binding.cardSendSMS.setOnClickListener(this);
+        binding.cardDarkMode.setOnClickListener(this);
         binding.btnLogout.setOnClickListener(this);
 
         // Set Details
@@ -56,8 +58,21 @@ public class DashboardHODActivity extends AppCompatActivity implements View.OnCl
                 break;
 
             case R.id.cardSendSMS:
-                // Send SMS
-                startActivity(new Intent(DashboardHODActivity.this, SendSMSActivity.class));
+                // SMS Initialization
+                startActivity(new Intent(DashboardHODActivity.this, SMSInitializationActivity.class));
+                break;
+
+            case R.id.cardDarkMode:
+                // Dark Mode / Light Mode
+                if (Preferences.getInstance(DashboardHODActivity.this).getIsDarkMode()) {
+                    // Set Light Mode
+                    Preferences.getInstance(DashboardHODActivity.this).setIsDarkMode(false);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else {
+                    // Set Dark Mode
+                    Preferences.getInstance(DashboardHODActivity.this).setIsDarkMode(true);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
                 break;
 
             case R.id.btnLogout:

@@ -38,6 +38,7 @@ public class Preferences {
     private static final String TEACHER_IS_VERIFIED = "TEACHER_IS_VERIFIED";
     private static final String TEACHER_NAME = "TEACHER_NAME";
     private static final String TEACHER_PASSWORD = "TEACHER_PASSWORD";
+    private static final String DIALOG_INSTRUCTIONS_O1 = "DIALOG_INSTRUCTIONS_O1";
 
     private Preferences(Context context) {
         this.context = context;
@@ -180,5 +181,39 @@ public class Preferences {
 
     public void clearPreferences() {
         sharedPreferences.edit().clear().apply();
+    }
+
+    public Boolean getDialogInstructions01() {
+        return sharedPreferences.getBoolean(DIALOG_INSTRUCTIONS_O1, false);
+    }
+
+    public void setDialogInstructionsO1(Boolean isDoNotShowAgain) {
+        editor = sharedPreferences.edit();
+        editor.putBoolean(DIALOG_INSTRUCTIONS_O1, isDoNotShowAgain);
+        editor.apply();
+    }
+
+    public String getEmail() {
+        switch (getType()) {
+            case "ADMIN":
+                return sharedPreferences.getString(ADMIN_EMAIL, null);
+            case "HOD":
+                return sharedPreferences.getString(HOD_EMAIL, null);
+            case "TEACHER":
+                return sharedPreferences.getString(TEACHER_EMAIL, null);
+        }
+        return null;
+    }
+
+    public String getPassword() {
+        switch (getType()) {
+            case "ADMIN":
+                return sharedPreferences.getString(ADMIN_PASSWORD, null);
+            case "HOD":
+                return sharedPreferences.getString(HOD_PASSWORD, null);
+            case "TEACHER":
+                return sharedPreferences.getString(TEACHER_PASSWORD, null);
+        }
+        return null;
     }
 }

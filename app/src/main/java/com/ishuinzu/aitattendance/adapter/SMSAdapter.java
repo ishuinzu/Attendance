@@ -23,6 +23,7 @@ import com.ishuinzu.aitattendance.R;
 import com.ishuinzu.aitattendance.dialog.LoadingDialog;
 import com.ishuinzu.aitattendance.object.SMS;
 
+import java.util.Date;
 import java.util.List;
 
 public class SMSAdapter extends RecyclerView.Adapter<SMSAdapter.ViewHolder> {
@@ -67,9 +68,12 @@ public class SMSAdapter extends RecyclerView.Adapter<SMSAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txtName.setText(smsList.get(position).getName());
         holder.txtPhoneNumber.setText(smsList.get(position).getFather_phone_number());
+        holder.txtDepartment.setText("Department : " + smsList.get(position).getDepartment());
+        holder.txtSection.setText("Section : " + smsList.get(position).getSection());
         holder.txtBy.setText("By : " + smsList.get(position).getBy_name() + " (" + smsList.get(position).getBy_type() + ")");
         holder.txtType.setText("Type : " + smsList.get(position).getMessage_type());
         holder.txtMessage.setText("Message : " + smsList.get(position).getMessage_text());
+        holder.txtDateTime.setText("Date - Time : " + new Date(smsList.get(position).getCreation()).toString().substring(0, 19));
         holder.btnDelete.setOnClickListener(view -> {
             // Show Deletion Dialog
             Dialog dialog = new Dialog(context);
@@ -121,6 +125,9 @@ public class SMSAdapter extends RecyclerView.Adapter<SMSAdapter.ViewHolder> {
         private final TextView txtPhoneNumber;
         private final TextView txtBy;
         private final TextView txtType;
+        private final TextView txtDateTime;
+        private final TextView txtDepartment;
+        private final TextView txtSection;
         private final TextView txtMessage;
         private final ImageView btnDelete;
 
@@ -132,7 +139,10 @@ public class SMSAdapter extends RecyclerView.Adapter<SMSAdapter.ViewHolder> {
             txtType = itemView.findViewById(R.id.txtType);
             txtBy = itemView.findViewById(R.id.txtBy);
             txtMessage = itemView.findViewById(R.id.txtMessage);
+            txtDateTime = itemView.findViewById(R.id.txtDateTime);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            txtDepartment = itemView.findViewById(R.id.txtDepartment);
+            txtSection = itemView.findViewById(R.id.txtSection);
         }
     }
 }

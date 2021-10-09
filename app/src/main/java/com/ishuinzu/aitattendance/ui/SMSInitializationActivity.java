@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -136,6 +137,7 @@ public class SMSInitializationActivity extends AppCompatActivity implements View
                 });
     }
 
+    @SuppressLint("SetTextI18n")
     private void getSections() {
         sectionNames = new ArrayList<>();
         sectionsArrayAdapter = new ArrayAdapter<>(SMSInitializationActivity.this, R.layout.item_drop_down, R.id.txtItem, sectionNames);
@@ -157,6 +159,8 @@ public class SMSInitializationActivity extends AppCompatActivity implements View
                 layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
                 layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
+                TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+                txtTitle.setText("To (All Sections)");
                 AutoCompleteTextView selectMessageType = dialog.findViewById(R.id.selectMessageType);
                 TextInputEditText edtMessage = dialog.findViewById(R.id.edtMessage);
                 selectMessageType.setOnItemClickListener((adapterView1, view12, i1, l1) -> {
@@ -312,8 +316,8 @@ public class SMSInitializationActivity extends AppCompatActivity implements View
         if (department.isEmpty() || department.equals("Select Department")) {
             Toast.makeText(SMSInitializationActivity.this, "Department Required", Toast.LENGTH_SHORT).show();
             return;
-        } else if (section.isEmpty() || section.equals("Select Section")) {
-            Toast.makeText(SMSInitializationActivity.this, "Section Required", Toast.LENGTH_SHORT).show();
+        } else if (section.isEmpty() || section.equals("Select Section") || section.equals("All Sections")) {
+            Toast.makeText(SMSInitializationActivity.this, "Specific Section Required", Toast.LENGTH_SHORT).show();
             return;
         } else {
             // Start Message Send Activity
@@ -325,8 +329,8 @@ public class SMSInitializationActivity extends AppCompatActivity implements View
         if (department.isEmpty() || department.equals("Select Department")) {
             Toast.makeText(SMSInitializationActivity.this, "Department Required", Toast.LENGTH_SHORT).show();
             return;
-        } else if (section.isEmpty() || section.equals("Select Section")) {
-            Toast.makeText(SMSInitializationActivity.this, "Section Required", Toast.LENGTH_SHORT).show();
+        } else if (section.isEmpty() || section.equals("Select Section") || section.equals("All Sections")) {
+            Toast.makeText(SMSInitializationActivity.this, "Specific Section Required", Toast.LENGTH_SHORT).show();
             return;
         } else {
             // Start Add Student Activity

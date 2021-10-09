@@ -4,15 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/activity_add_student.xml" value="0.1814814814814815" />
-        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/activity_dashboard_admin.xml" value="0.1814814814814815" />
+        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/activity_dashboard_admin.xml" value="0.25" />
+        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/activity_dashboard_hod.xml" value="0.18055555555555555" />
         <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/activity_send_sms.xml" value="0.1814814814814815" />
         <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/activity_sms_history.xml" value="0.2" />
         <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/activity_sms_initialization.xml" value="0.1814814814814815" />
         <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/activity_update_student.xml" value="0.1814814814814815" />
         <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/activity_update_teacher.xml" value="0.225" />
-        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/item_sent_sms.xml" value="0.2" />
-        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/item_student.xml" value="0.1814814814814815" />
+        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/item_hod.xml" value="0.225" />
+        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/item_sent_sms.xml" value="0.33" />
+        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/item_student.xml" value="0.25" />
+        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/item_teacher.xml" value="0.225" />
         <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/layout_dialog_delete_profile.xml" value="0.225" />
+        <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/layout_dialog_instructions_01.xml" value="0.33" />
         <entry key="..\:/Users/ishui/AndroidStudioProjects/Attendance/app/src/main/res/layout/layout_dialog_message_type.xml" value="0.1814814814814815" />
       </map>
     </option>

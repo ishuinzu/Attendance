@@ -74,7 +74,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         return new ViewHolder(layoutInflater.inflate(R.layout.item_student, parent, false));
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
@@ -84,17 +84,19 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         if (selections.get(position)) {
             holder.txtName.setTextColor(context.getColor(R.color.white));
             holder.txtRollNumber.setTextColor(context.getColor(R.color.white));
+            holder.txtUpdate.setTextColor(context.getColor(R.color.white));
+            holder.txtDelete.setTextColor(context.getColor(R.color.white));
+            holder.txtMessage.setTextColor(context.getColor(R.color.white));
             holder.cardStudent.setCardBackgroundColor(context.getColor(R.color.primary_700));
         } else {
             holder.txtName.setTextColor(context.getColor(R.color.text_color));
             holder.txtRollNumber.setTextColor(context.getColor(R.color.text_color));
+            holder.txtUpdate.setTextColor(context.getColor(R.color.primary_700));
+            holder.txtDelete.setTextColor(context.getColor(R.color.primary_700));
+            holder.txtMessage.setTextColor(context.getColor(R.color.primary_700));
             holder.cardStudent.setCardBackgroundColor(context.getColor(R.color.text_color_invert));
         }
 
-        holder.cardStudent.setOnClickListener(view -> {
-            // Open Update Activity
-            context.startActivity(new Intent(context, UpdateStudentActivity.class).putExtra("DEPARTMENT", students.get(position).getDepartment()).putExtra("SECTION", students.get(position).getSection()).putExtra("CREATION", students.get(position).getCreation()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-        });
         holder.btnUpdate.setOnClickListener(view -> {
             // Update Student
             context.startActivity(new Intent(context, UpdateStudentActivity.class).putExtra("DEPARTMENT", students.get(position).getDepartment()).putExtra("SECTION", students.get(position).getSection()).putExtra("CREATION", students.get(position).getCreation()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -148,6 +150,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
+            TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+            txtTitle.setText("To (" + students.get(position).getFather_phone_number() + ")");
             AutoCompleteTextView selectMessageType = dialog.findViewById(R.id.selectMessageType);
             TextInputEditText edtMessage = dialog.findViewById(R.id.edtMessage);
             selectMessageType.setOnItemClickListener((adapterView, view12, i, l) -> {
@@ -255,6 +259,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         private final ImageView btnUpdate;
         private final ImageView btnDelete;
         private final ImageView btnMessage;
+        private final TextView txtUpdate;
+        private final TextView txtDelete;
+        private final TextView txtMessage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -264,6 +271,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             btnUpdate = itemView.findViewById(R.id.btnUpdate);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnMessage = itemView.findViewById(R.id.btnMessage);
+            txtUpdate = itemView.findViewById(R.id.txtUpdate);
+            txtDelete = itemView.findViewById(R.id.txtDelete);
+            txtMessage = itemView.findViewById(R.id.txtMessage);
         }
     }
 }
