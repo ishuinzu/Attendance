@@ -7,11 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ishuinzu.aitattendance.R;
 import com.ishuinzu.aitattendance.app.GlideApp;
 import com.ishuinzu.aitattendance.app.Preferences;
@@ -53,13 +60,23 @@ public class DashboardHODActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cardManageTeachers:
-                // Manage Teachers
-                startActivity(new Intent(DashboardHODActivity.this, ManageTeachersActivity.class));
+                if (hod.getIs_verified()) {
+                    // Manage Teachers
+                    startActivity(new Intent(DashboardHODActivity.this, ManageTeachersActivity.class));
+                } else {
+                    // Show Dialog
+                    showVerificationDialog();
+                }
                 break;
 
             case R.id.cardSendSMS:
-                // SMS Initialization
-                startActivity(new Intent(DashboardHODActivity.this, SMSInitializationActivity.class));
+                if (hod.getIs_verified()) {
+                    // SMS Initialization
+                    startActivity(new Intent(DashboardHODActivity.this, SMSInitializationActivity.class));
+                } else {
+                    // Show Dialog
+                    showVerificationDialog();
+                }
                 break;
 
             case R.id.cardDarkMode:
@@ -107,5 +124,61 @@ public class DashboardHODActivity extends AppCompatActivity implements View.OnCl
                 dialog.show();
                 break;
         }
+    }
+
+    private void showVerificationDialog() {
+        Dialog dialog = new Dialog(DashboardHODActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_dialog_verification);
+        dialog.setCancelable(true);
+
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        TextView txtVerificationStatus = dialog.findViewById(R.id.txtVerificationStatus);
+        (dialog.findViewById(R.id.btnCancel)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        (dialog.findViewById(R.id.btnCheckNow)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Check Verification Status
+                FirebaseDatabase.getInstance().getReference().child("hod")
+                        .child(hod.getId())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @SuppressLint("SetTextI18n")
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    if (task.getResult() != null) {
+                                        hod = task.getResult().getValue(HOD.class);
+
+                                        if (hod != null) {
+                                            if (hod.getIs_verified()) {
+                                                txtVerificationStatus.setText("Verified");
+                                                Toast.makeText(DashboardHODActivity.this, "Verified", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                txtVerificationStatus.setText("Unverified");
+                                                Toast.makeText(DashboardHODActivity.this, "Unverified", Toast.LENGTH_SHORT).show();
+                                            }
+                                            Preferences.getInstance(DashboardHODActivity.this).setHOD(hod);
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                }
+                            }
+                        });
+            }
+        });
+
+        dialog.getWindow().setAttributes(layoutParams);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
+        dialog.show();
     }
 }
