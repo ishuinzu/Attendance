@@ -9,6 +9,7 @@
     android:focusable="false"
     app:cardCornerRadius="10dp"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/background"
     app:cardUseCompatPadding="false">
 
     <LinearLayout
@@ -26,6 +27,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/comfortaa"
             android:maxLines="1"
+            android:textColor="@color/text_color_2"
             android:text="Do You Really Want To Delete?" />
 
         <LinearLayout
@@ -43,7 +45,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Cancel"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_2"
                 android:textStyle="bold" />
 
             <com.google.android.material.button.MaterialButton
@@ -54,7 +56,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Delete"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_2"
                 android:textStyle="bold" />
 
         </LinearLayout>

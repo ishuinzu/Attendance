@@ -8,6 +8,7 @@
     android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="@color/background"
     app:cardElevation="0dp"
     app:cardUseCompatPadding="true">
 
@@ -27,7 +28,7 @@
             android:fontFamily="@font/comfortaa_bold"
             android:maxLines="1"
             android:text="Department Name"
-            android:textColor="@color/text_color"
+            android:textColor="@color/text_color_2"
             android:textSize="16sp"
             android:textStyle="bold" />
 

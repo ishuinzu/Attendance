@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="surface">#FFFFFFFF</color>
     <color name="text_color">#FF000000</color>
+    <color name="text_color_2">#FF000000</color>
     <color name="text_color_invert">#FFFFFFFF</color>
     <color name="background">#FFFFFFFF</color>
 </resources>

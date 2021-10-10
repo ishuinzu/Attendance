@@ -9,6 +9,7 @@
     android:focusable="false"
     app:cardCornerRadius="10dp"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/background"
     app:cardUseCompatPadding="false">
 
     <LinearLayout
@@ -27,7 +28,7 @@
             android:fontFamily="@font/comfortaa_bold"
             android:maxLines="1"
             android:text="Verification Status"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color_2" />
 
         <TextView
             android:id="@+id/txtVerificationStatus"
@@ -39,7 +40,7 @@
             android:fontFamily="@font/comfortaa"
             android:maxLines="1"
             android:text="Unverified"
-            android:textColor="@color/primary_700"
+            android:textColor="@color/text_color_2"
             android:textSize="12sp" />
 
         <LinearLayout
@@ -57,7 +58,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Cancel"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_2"
                 android:textStyle="bold" />
 
             <com.google.android.material.button.MaterialButton
@@ -68,7 +69,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Check Now"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_2"
                 android:textStyle="bold" />
 
         </LinearLayout>

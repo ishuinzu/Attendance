@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <TextView
@@ -9,9 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:fontFamily="@font/comfortaa"
+        android:fontFamily="@font/comfortaa_bold"
         android:maxLines="1"
-        android:padding="8dp"
+        android:padding="12dp"
+        android:textColor="@color/text_color_2"
         android:textAppearance="?attr/textAppearanceSubtitle1"
         android:textSize="12sp" />
 

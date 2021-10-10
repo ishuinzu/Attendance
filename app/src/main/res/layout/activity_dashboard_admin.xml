@@ -119,13 +119,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingTop="16dp">
+                    android:padding="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
                         android:weightSum="2">
 
                         <com.google.android.material.card.MaterialCardView
@@ -224,7 +223,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
                         android:weightSum="2">
 
                         <com.google.android.material.card.MaterialCardView
@@ -323,7 +321,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
                         android:weightSum="2">
 
                         <com.google.android.material.card.MaterialCardView

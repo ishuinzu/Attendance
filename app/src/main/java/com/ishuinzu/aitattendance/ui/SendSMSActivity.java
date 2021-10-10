@@ -97,7 +97,10 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
                 Preferences.getInstance(SendSMSActivity.this).setDialogInstructionsO1(true);
                 dialog.dismiss();
             });
-            (dialog.findViewById(R.id.btnIKnow)).setOnClickListener(view1 -> dialog.dismiss());
+            (dialog.findViewById(R.id.btnIKnow)).setOnClickListener(view1 -> {
+                askPermission();
+                dialog.dismiss();
+            });
 
             dialog.getWindow().setAttributes(layoutParams);
             dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));

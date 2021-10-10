@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/comfortaa_bold"
         android:text="Welcome"
-        android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="28sp" />
 

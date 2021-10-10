@@ -8,13 +8,13 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardProfile"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:clickable="false"
         android:focusable="false"
-        app:cardBackgroundColor="@color/primary_700"
+        app:cardBackgroundColor="@color/background"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="true">
@@ -37,7 +37,7 @@
                 android:fontFamily="@font/comfortaa_bold"
                 android:maxLines="1"
                 android:text="Name"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color_2"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                 android:fontFamily="@font/comfortaa"
                 android:maxLines="2"
                 android:text="Department"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color_2"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -85,7 +85,7 @@
                         android:fontFamily="@font/comfortaa"
                         android:maxLines="1"
                         android:text="Edit"
-                        android:textColor="@color/white"
+                        android:textColor="@color/text_color_2"
                         android:textSize="10sp" />
 
                 </LinearLayout>
@@ -115,7 +115,7 @@
                         android:fontFamily="@font/comfortaa"
                         android:maxLines="1"
                         android:text="Delete"
-                        android:textColor="@color/white"
+                        android:textColor="@color/text_color_2"
                         android:textSize="10sp" />
 
                 </LinearLayout>
@@ -145,7 +145,7 @@
                         android:fontFamily="@font/comfortaa"
                         android:maxLines="1"
                         android:text="Verify"
-                        android:textColor="@color/white"
+                        android:textColor="@color/text_color_2"
                         android:textSize="10sp" />
 
                 </LinearLayout>

@@ -96,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingHorizontal="32dp">
+                    android:padding="16dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -174,7 +174,7 @@
                         android:layout_marginBottom="8dp"
                         android:clickable="true"
                         android:focusable="true"
-                        app:cardBackgroundColor="@color/primary_700"
+                        app:cardBackgroundColor="@color/secondary_500"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="0dp"
                         app:cardUseCompatPadding="true">
@@ -211,6 +211,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="@color/secondary_500"
                         app:cardElevation="0dp"
                         app:cardUseCompatPadding="true">
 
@@ -229,7 +230,7 @@
                                 android:maxLines="1"
                                 android:text="Forget Password"
                                 android:textAllCaps="true"
-                                android:textColor="@color/primary_700"
+                                android:textColor="@color/white"
                                 android:textSize="12sp" />
 
                         </LinearLayout>

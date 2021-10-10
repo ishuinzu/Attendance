@@ -10,6 +10,7 @@
     android:focusable="false"
     app:cardCornerRadius="10dp"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/background"
     app:cardUseCompatPadding="false">
 
     <LinearLayout
@@ -28,7 +29,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/comfortaa_bold"
             android:maxLines="1"
-            android:textColor="@color/text_color"
+            android:textColor="@color/text_color_2"
             android:text="Send SMS" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -98,7 +99,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Cancel"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_2"
                 android:textStyle="bold" />
 
             <com.google.android.material.button.MaterialButton
@@ -109,7 +110,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Send"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_2"
                 android:textStyle="bold" />
 
         </LinearLayout>

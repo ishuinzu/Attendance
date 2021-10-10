@@ -9,6 +9,7 @@
     android:focusable="false"
     app:cardCornerRadius="10dp"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/background"
     app:cardUseCompatPadding="false">
 
     <LinearLayout
@@ -28,7 +29,7 @@
             android:fontFamily="@font/comfortaa_bold"
             android:maxLines="1"
             android:text="Add Department"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color_2" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -68,7 +69,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Cancel"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_2"
                 android:textStyle="bold" />
 
             <com.google.android.material.button.MaterialButton
@@ -79,7 +80,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comfortaa_bold"
                 android:text="Add"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_2"
                 android:textStyle="bold" />
 
         </LinearLayout>

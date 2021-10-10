@@ -1,54 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/primary_700"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".ui.SendSMSActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:liftOnScroll="true">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:gravity="start"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/comfortaa_bold"
-                    android:text="Send SMS"
-                    android:textColor="@color/text_color"
-                    android:textSize="24sp" />
-
-                <ImageView
-                    android:id="@+id/btnCloseScreen"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:src="@drawable/icon_close_screen"
-                    tools:ignore="contentDescription" />
-
-            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/comfortaa_bold"
+                android:maxLines="1"
+                android:text="Send SMS"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtSubTitle"
@@ -57,132 +41,177 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/comfortaa"
                 android:maxLines="1"
-                android:text="Department : ---- &amp; Section : ----" />
+                android:text="Department : ---- &amp; Section : ----"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
 
         </LinearLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/btnCloseScreen"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/icon_close_screen"
+                tools:ignore="contentDescription" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
+        android:layout_weight="9"
+        android:background="@drawable/rounded_bg"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:clickable="false"
+            android:focusable="false"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="false">
+
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardSelectAll"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="@color/primary_700"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp"
-                    app:cardUseCompatPadding="true">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <TextView
-                            android:id="@+id/txtSelectDeSelect"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/comfortaa_bold"
-                            android:maxLines="1"
-                            android:text="Select All"
-                            android:textAllCaps="true"
-                            android:textColor="@color/white"
-                            android:textSize="10sp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
+                android:layout_height="match_parent"
+                android:scrollbarSize="0dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cardMessage"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:clickable="true"
-                        android:focusable="true"
-                        app:cardBackgroundColor="@color/primary_700"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="0dp"
-                        app:cardUseCompatPadding="true">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardSelectAll"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/secondary_500"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp"
+                            app:cardUseCompatPadding="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <TextView
+                                    android:id="@+id/txtSelectDeSelect"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/comfortaa_bold"
+                                    android:maxLines="1"
+                                    android:text="Select All"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="8dp">
+                            android:layout_alignParentEnd="true"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cardMessage"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="@color/secondary_500"
+                                app:cardCornerRadius="10dp"
+                                app:cardElevation="0dp"
+                                app:cardUseCompatPadding="true">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="8dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:ellipsize="end"
+                                        android:fontFamily="@font/comfortaa_bold"
+                                        android:maxLines="1"
+                                        android:text="Message"
+                                        android:textAllCaps="true"
+                                        android:textColor="@color/white"
+                                        android:textSize="10sp" />
+
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
 
                             <TextView
+                                android:id="@+id/txtSelected"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:ellipsize="end"
                                 android:fontFamily="@font/comfortaa_bold"
                                 android:maxLines="1"
-                                android:text="Message"
+                                android:text="SELECTED : All"
                                 android:textAllCaps="true"
-                                android:textColor="@color/white"
+                                android:textColor="@color/text_color"
                                 android:textSize="10sp" />
 
                         </LinearLayout>
 
-                    </com.google.android.material.card.MaterialCardView>
+                    </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/txtSelected"
-                        android:layout_width="wrap_content"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerStudents"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/comfortaa_bold"
-                        android:maxLines="1"
-                        android:text="SELECTED : All"
-                        android:textAllCaps="true"
-                        android:textColor="@color/text_color"
-                        android:textSize="10sp" />
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_student" />
 
                 </LinearLayout>
 
-            </RelativeLayout>
+            </ScrollView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerStudents"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_student" />
+        </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
