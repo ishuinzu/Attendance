@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -48,6 +47,7 @@ public class ConfigAdministratorActivity extends AppCompatActivity implements Vi
     private ActivityConfigAdministratorBinding binding;
     private Uri imageURI;
     private Boolean isImageSelected;
+    private Boolean tryAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class ConfigAdministratorActivity extends AppCompatActivity implements Vi
 
         imageURI = null;
         isImageSelected = false;
+        tryAgain = false;
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -189,35 +190,43 @@ public class ConfigAdministratorActivity extends AppCompatActivity implements Vi
         // Show Loading
         LoadingDialog.showLoadingDialog(ConfigAdministratorActivity.this);
 
+        final long[] totalAdmins = {0};
+
         // Check Administrator
-        FirebaseDatabase.getInstance().getReference().child("config").child("admin").child("exists")
+        FirebaseDatabase.getInstance().getReference().child("admin")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @SuppressLint("LongLogTag")
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful()) {
                             if (task.getResult() != null) {
-                                boolean isExists = task.getResult().getValue(Boolean.class);
+                                totalAdmins[0] = task.getResult().getChildrenCount();
 
-                                if (isExists) {
-                                    Log.d(TAG, "ADMIN FOUND");
+                                if (totalAdmins[0] < 3) {
+                                    // Upload Admin
+                                    uploadAdmin();
+                                } else {
                                     // Close Loading
                                     LoadingDialog.closeDialog();
 
-                                    Toast.makeText(ConfigAdministratorActivity.this, "Admin Already Exists", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                } else {
-                                    Log.d(TAG, "NO ADMIN FOUND");
-                                    uploadAdmin();
+                                    Toast.makeText(ConfigAdministratorActivity.this, "03 Admins Already Exist", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {
-                                Log.d(TAG, "NO ADMIN FOUND");
-                                uploadAdmin();
                             }
                         } else {
-                            Log.d(TAG, "NO ADMIN FOUND");
-                            uploadAdmin();
+                            totalAdmins[0] = 0;
+                            // Close Loading
+                            LoadingDialog.closeDialog();
+
+                            if (!tryAgain) {
+                                tryAgain = true;
+                                saveConfiguration();
+                            } else {
+                                // Show Loading
+                                LoadingDialog.showLoadingDialog(ConfigAdministratorActivity.this);
+
+                                // Upload Admin
+                                uploadAdmin();
+                            }
                         }
                     }
                 });
@@ -308,23 +317,11 @@ public class ConfigAdministratorActivity extends AppCompatActivity implements Vi
                                                                                         @Override
                                                                                         public void onComplete(@NonNull Task<Void> task) {
                                                                                             if (task.isSuccessful()) {
-                                                                                                // Update config
-                                                                                                FirebaseDatabase.getInstance().getReference().child("config").child("admin").child("exists")
-                                                                                                        .setValue(true)
-                                                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                            @SuppressLint("LongLogTag")
-                                                                                                            @Override
-                                                                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                if (task.isSuccessful()) {
-                                                                                                                    Log.d(TAG, "ADMIN UPLOADED");
-                                                                                                                    // Close Loading
-                                                                                                                    LoadingDialog.closeDialog();
+                                                                                                // Close Loading
+                                                                                                LoadingDialog.closeDialog();
 
-                                                                                                                    Toast.makeText(ConfigAdministratorActivity.this, "Admin Configured", Toast.LENGTH_SHORT).show();
-                                                                                                                    finish();
-                                                                                                                }
-                                                                                                            }
-                                                                                                        });
+                                                                                                Toast.makeText(ConfigAdministratorActivity.this, "Admin Configured", Toast.LENGTH_SHORT).show();
+                                                                                                finish();
                                                                                             }
                                                                                         }
                                                                                     });

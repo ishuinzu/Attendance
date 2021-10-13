@@ -71,8 +71,10 @@ public class LoginAdministratorActivity extends AppCompatActivity implements Vie
         // Show Loading
         LoadingDialog.showLoadingDialog(LoginAdministratorActivity.this);
 
+        final long[] totalAdmins = {0};
+
         // Check Administrator
-        FirebaseDatabase.getInstance().getReference().child("config").child("admin").child("exists")
+        FirebaseDatabase.getInstance().getReference().child("admin")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @SuppressLint("LongLogTag")
@@ -80,9 +82,9 @@ public class LoginAdministratorActivity extends AppCompatActivity implements Vie
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful()) {
                             if (task.getResult() != null) {
-                                boolean isExists = task.getResult().getValue(Boolean.class);
+                                totalAdmins[0] = task.getResult().getChildrenCount();
 
-                                if (isExists) {
+                                if (totalAdmins[0] > 0) {
                                     Log.d(TAG, "ADMIN FOUND");
 
                                     loginAdminNow();
