@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        Boolean isDarkMode = Preferences.getInstance(MainActivity.this).getIsDarkMode();
-        Boolean isLoggedIn = Preferences.getInstance(MainActivity.this).isLoggedIn();
+        boolean isDarkMode = Preferences.getInstance(MainActivity.this).getIsDarkMode();
+        boolean isLoggedIn = Preferences.getInstance(MainActivity.this).isLoggedIn();
 
         if (isDarkMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

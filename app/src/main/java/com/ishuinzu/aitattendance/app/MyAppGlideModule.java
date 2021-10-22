@@ -25,7 +25,6 @@ public class MyAppGlideModule extends AppGlideModule {
 
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
-        //super.registerComponents(context, glide, registry);
         OkHttpClient client = new OkHttpClient().newBuilder().readTimeout(30, TimeUnit.SECONDS).connectTimeout(30, TimeUnit.SECONDS).build();
         OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory(client);
         glide.getRegistry().replace(GlideUrl.class, InputStream.class, factory);

@@ -8,10 +8,11 @@ android {
 
     defaultConfig {
         applicationId "com.ishuinzu.aitattendance"
-        minSdk 21
+        minSdk 20
         targetSdk 31
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
