@@ -7,27 +7,29 @@ public class SMS {
     private Long creation;
     private String department;
     private String father_name;
-    private String father_phone_number;
     private String message_text;
     private String message_type;
     private String name;
+    private String phone_number_01;
+    private String phone_number_02;
     private String roll_number;
     private String section;
 
     public SMS() {
     }
 
-    public SMS(String address, String by_name, String by_type, Long creation, String department, String father_name, String father_phone_number, String message_text, String message_type, String name, String roll_number, String section) {
+    public SMS(String address, String by_name, String by_type, Long creation, String department, String father_name, String message_text, String message_type, String name, String phone_number_01, String phone_number_02, String roll_number, String section) {
         this.address = address;
         this.by_name = by_name;
         this.by_type = by_type;
         this.creation = creation;
         this.department = department;
         this.father_name = father_name;
-        this.father_phone_number = father_phone_number;
         this.message_text = message_text;
         this.message_type = message_type;
         this.name = name;
+        this.phone_number_01 = phone_number_01;
+        this.phone_number_02 = phone_number_02;
         this.roll_number = roll_number;
         this.section = section;
     }
@@ -80,22 +82,6 @@ public class SMS {
         this.father_name = father_name;
     }
 
-    public String getFather_phone_number() {
-        return father_phone_number;
-    }
-
-    public void setFather_phone_number(String father_phone_number) {
-        this.father_phone_number = father_phone_number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getMessage_text() {
         return message_text;
     }
@@ -110,6 +96,30 @@ public class SMS {
 
     public void setMessage_type(String message_type) {
         this.message_type = message_type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone_number_01() {
+        return phone_number_01;
+    }
+
+    public void setPhone_number_01(String phone_number_01) {
+        this.phone_number_01 = phone_number_01;
+    }
+
+    public String getPhone_number_02() {
+        return phone_number_02;
+    }
+
+    public void setPhone_number_02(String phone_number_02) {
+        this.phone_number_02 = phone_number_02;
     }
 
     public String getRoll_number() {

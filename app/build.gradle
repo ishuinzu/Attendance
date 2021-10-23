@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.ishuinzu.aitattendance"
         minSdk 20
-        targetSdk 31
+        targetSdk 29
         versionCode 1
         versionName "1.0"
         multiDexEnabled true

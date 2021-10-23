@@ -103,7 +103,9 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
             });
 
             dialog.getWindow().setAttributes(layoutParams);
-            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
+            }
             dialog.show();
         }
 
@@ -196,7 +198,8 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
                             if (selections.get(i)) {
                                 try {
                                     SmsManager smsManager = SmsManager.getDefault();
-                                    smsManager.sendTextMessage(students.get(i).getFather_phone_number(), null, messageType + "\n\n" + message, null, null);
+                                    smsManager.sendTextMessage(students.get(i).getPhone_number_01(), null, messageType + "\n\n" + message, null, null);
+                                    smsManager.sendTextMessage(students.get(i).getPhone_number_02(), null, messageType + "\n\n" + message, null, null);
 
                                     // Save Message To Database
                                     SMS sms = new SMS();
@@ -210,7 +213,8 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
                                     sms.setMessage_text(message);
                                     sms.setSection(students.get(i).getSection());
                                     sms.setRoll_number(students.get(i).getRoll_number());
-                                    sms.setFather_phone_number(students.get(i).getFather_phone_number());
+                                    sms.setPhone_number_01(students.get(i).getPhone_number_01());
+                                    sms.setPhone_number_02(students.get(i).getPhone_number_02());
                                     sms.setMessage_type(messageType);
 
                                     FirebaseDatabase.getInstance().getReference().child("sms")
@@ -274,7 +278,9 @@ public class SendSMSActivity extends AppCompatActivity implements View.OnClickLi
                     });
 
             dialog.getWindow().setAttributes(layoutParams);
-            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
+            }
             dialog.show();
         } else {
             Toast.makeText(SendSMSActivity.this, "No Student Found", Toast.LENGTH_SHORT).show();

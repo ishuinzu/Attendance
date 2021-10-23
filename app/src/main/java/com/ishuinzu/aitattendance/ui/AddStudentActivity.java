@@ -67,7 +67,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
         String name = binding.edtStudentName.getText().toString();
         String roll_number = binding.edtRollNumber.getText().toString();
         String father_name = binding.edtFatherName.getText().toString();
-        String father_phone_number = binding.edtFatherPhoneNumber.getText().toString();
+        String phone_number_01 = binding.edtPhoneNumber01.getText().toString();
+        String phone_number_02 = binding.edtPhoneNumber02.getText().toString();
         String address = binding.edtAddress.getText().toString();
 
         if (name.isEmpty()) {
@@ -79,14 +80,23 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
         } else if (father_name.isEmpty()) {
             Toast.makeText(AddStudentActivity.this, "Father Name Required", Toast.LENGTH_SHORT).show();
             return;
-        } else if (father_phone_number.isEmpty()) {
-            Toast.makeText(AddStudentActivity.this, "Father Phone Number Required", Toast.LENGTH_SHORT).show();
+        } else if (phone_number_01.isEmpty()) {
+            Toast.makeText(AddStudentActivity.this, "Phone Number 01 Required", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (phone_number_02.isEmpty()) {
+            Toast.makeText(AddStudentActivity.this, "Phone Number 02 Required", Toast.LENGTH_SHORT).show();
             return;
         } else if (address.isEmpty()) {
             Toast.makeText(AddStudentActivity.this, "Address Required", Toast.LENGTH_SHORT).show();
             return;
-        } else if (father_phone_number.charAt(0) == '0') {
-            Toast.makeText(AddStudentActivity.this, "Remove First Digit (0) From Father's Phone Number", Toast.LENGTH_SHORT).show();
+        } else if (phone_number_01.charAt(0) == '0') {
+            Toast.makeText(AddStudentActivity.this, "Remove First Digit (0) From Phone Number 01", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (phone_number_02.charAt(0) == '0') {
+            Toast.makeText(AddStudentActivity.this, "Remove First Digit (0) From Phone Number 02", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (phone_number_01.equals(phone_number_02)) {
+            Toast.makeText(AddStudentActivity.this, "Both Numbers Should Be Different", Toast.LENGTH_SHORT).show();
             return;
         } else {
             // Add Student
@@ -95,7 +105,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
             student.setCreation(System.currentTimeMillis());
             student.setDepartment(department);
             student.setFather_name(father_name);
-            student.setFather_phone_number("+92" + father_phone_number.replaceAll("\\s+", ""));
+            student.setPhone_number_01("+92" + phone_number_01.replaceAll("\\s+", ""));
+            student.setPhone_number_02("+92" + phone_number_02.replaceAll("\\s+", ""));
             student.setName(name);
             student.setRoll_number(roll_number);
             student.setSection(section);
@@ -119,7 +130,8 @@ public class AddStudentActivity extends AppCompatActivity implements View.OnClic
                                 // Clear Data
                                 binding.edtAddress.setText("");
                                 binding.edtFatherName.setText("");
-                                binding.edtFatherPhoneNumber.setText("");
+                                binding.edtPhoneNumber01.setText("");
+                                binding.edtPhoneNumber02.setText("");
                                 binding.edtStudentName.setText("");
                                 binding.edtRollNumber.setText("");
                             }

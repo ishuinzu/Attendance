@@ -3,6 +3,7 @@ package com.ishuinzu.aitattendance.ui;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
@@ -191,7 +192,8 @@ public class SMSInitializationActivity extends AppCompatActivity implements View
                                                                 if (student != null) {
                                                                     try {
                                                                         SmsManager smsManager = SmsManager.getDefault();
-                                                                        smsManager.sendTextMessage(student.getFather_phone_number(), null, messageType + "\n\n" + message, null, null);
+                                                                        smsManager.sendTextMessage(student.getPhone_number_01(), null, messageType + "\n\n" + message, null, null);
+                                                                        smsManager.sendTextMessage(student.getPhone_number_02(), null, messageType + "\n\n" + message, null, null);
 
                                                                         // Save Message To Database
                                                                         SMS sms = new SMS();
@@ -205,7 +207,8 @@ public class SMSInitializationActivity extends AppCompatActivity implements View
                                                                         sms.setMessage_text(message);
                                                                         sms.setSection(student.getSection());
                                                                         sms.setRoll_number(student.getRoll_number());
-                                                                        sms.setFather_phone_number(student.getFather_phone_number());
+                                                                        sms.setPhone_number_01(student.getPhone_number_01());
+                                                                        sms.setPhone_number_02(student.getPhone_number_02());
                                                                         sms.setMessage_type(messageType);
 
                                                                         FirebaseDatabase.getInstance().getReference().child("sms")
@@ -279,7 +282,9 @@ public class SMSInitializationActivity extends AppCompatActivity implements View
                         });
 
                 dialog.getWindow().setAttributes(layoutParams);
-                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.background_transparent));
+                }
                 dialog.show();
             }
         });

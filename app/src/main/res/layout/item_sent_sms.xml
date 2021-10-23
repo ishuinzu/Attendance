@@ -46,7 +46,18 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtPhoneNumber"
+                    android:id="@+id/txtPhoneNumber01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/comfortaa"
+                    android:maxLines="2"
+                    android:text="020202020"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/txtPhoneNumber02"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:ellipsize="end"

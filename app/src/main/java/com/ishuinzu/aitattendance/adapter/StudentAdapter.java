@@ -79,18 +79,21 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txtName.setText(students.get(position).getName());
-        holder.txtRollNumber.setText(students.get(position).getFather_phone_number());
+        holder.txtPhoneNumber01.setText(students.get(position).getPhone_number_01());
+        holder.txtPhoneNumber02.setText(students.get(position).getPhone_number_02());
 
         if (selections.get(position)) {
             holder.txtName.setTextColor(context.getColor(R.color.white));
-            holder.txtRollNumber.setTextColor(context.getColor(R.color.white));
+            holder.txtPhoneNumber01.setTextColor(context.getColor(R.color.white));
+            holder.txtPhoneNumber02.setTextColor(context.getColor(R.color.white));
             holder.txtUpdate.setTextColor(context.getColor(R.color.white));
             holder.txtDelete.setTextColor(context.getColor(R.color.white));
             holder.txtMessage.setTextColor(context.getColor(R.color.white));
             holder.cardStudent.setCardBackgroundColor(context.getColor(R.color.primary_700));
         } else {
             holder.txtName.setTextColor(context.getColor(R.color.text_color));
-            holder.txtRollNumber.setTextColor(context.getColor(R.color.text_color));
+            holder.txtPhoneNumber01.setTextColor(context.getColor(R.color.text_color));
+            holder.txtPhoneNumber02.setTextColor(context.getColor(R.color.text_color));
             holder.txtUpdate.setTextColor(context.getColor(R.color.primary_700));
             holder.txtDelete.setTextColor(context.getColor(R.color.primary_700));
             holder.txtMessage.setTextColor(context.getColor(R.color.primary_700));
@@ -151,7 +154,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
             TextView txtTitle = dialog.findViewById(R.id.txtTitle);
-            txtTitle.setText("To (" + students.get(position).getFather_phone_number() + ")");
+            txtTitle.setText("To (" + students.get(position).getPhone_number_01() + students.get(position).getPhone_number_02() + " )");
             AutoCompleteTextView selectMessageType = dialog.findViewById(R.id.selectMessageType);
             TextInputEditText edtMessage = dialog.findViewById(R.id.edtMessage);
             selectMessageType.setOnItemClickListener((adapterView, view12, i, l) -> {
@@ -166,7 +169,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
                         // Send SMS
                         try {
                             SmsManager smsManager = SmsManager.getDefault();
-                            smsManager.sendTextMessage(students.get(position).getFather_phone_number(), null, messageType + "\n\n" + message, null, null);
+                            smsManager.sendTextMessage(students.get(position).getPhone_number_01(), null, messageType + "\n\n" + message, null, null);
+                            smsManager.sendTextMessage(students.get(position).getPhone_number_02(), null, messageType + "\n\n" + message, null, null);
 
                             // Save Message To Database
                             SMS sms = new SMS();
@@ -180,7 +184,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
                             sms.setMessage_text(message);
                             sms.setSection(students.get(position).getSection());
                             sms.setRoll_number(students.get(position).getRoll_number());
-                            sms.setFather_phone_number(students.get(position).getFather_phone_number());
+                            sms.setPhone_number_01(students.get(position).getPhone_number_01());
+                            sms.setPhone_number_02(students.get(position).getPhone_number_02());
                             sms.setMessage_type(messageType);
 
                             FirebaseDatabase.getInstance().getReference().child("sms")
@@ -255,7 +260,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final MaterialCardView cardStudent;
         private final TextView txtName;
-        private final TextView txtRollNumber;
+        private final TextView txtPhoneNumber01;
+        private final TextView txtPhoneNumber02;
         private final ImageView btnUpdate;
         private final ImageView btnDelete;
         private final ImageView btnMessage;
@@ -267,7 +273,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             super(itemView);
             cardStudent = itemView.findViewById(R.id.cardStudent);
             txtName = itemView.findViewById(R.id.txtName);
-            txtRollNumber = itemView.findViewById(R.id.txtRollNumber);
+            txtPhoneNumber01 = itemView.findViewById(R.id.txtPhoneNumber01);
+            txtPhoneNumber02 = itemView.findViewById(R.id.txtPhoneNumber02);
             btnUpdate = itemView.findViewById(R.id.btnUpdate);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnMessage = itemView.findViewById(R.id.btnMessage);

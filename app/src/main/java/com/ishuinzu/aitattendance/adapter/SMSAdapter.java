@@ -67,7 +67,8 @@ public class SMSAdapter extends RecyclerView.Adapter<SMSAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txtName.setText(smsList.get(position).getName());
-        holder.txtPhoneNumber.setText(smsList.get(position).getFather_phone_number());
+        holder.txtPhoneNumber01.setText(smsList.get(position).getPhone_number_01());
+        holder.txtPhoneNumber02.setText(smsList.get(position).getPhone_number_02());
         holder.txtDepartment.setText("Department : " + smsList.get(position).getDepartment());
         holder.txtSection.setText("Section : " + smsList.get(position).getSection());
         holder.txtBy.setText("By : " + smsList.get(position).getBy_name() + " (" + smsList.get(position).getBy_type() + ")");
@@ -122,7 +123,8 @@ public class SMSAdapter extends RecyclerView.Adapter<SMSAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final MaterialCardView cardStudent;
         private final TextView txtName;
-        private final TextView txtPhoneNumber;
+        private final TextView txtPhoneNumber01;
+        private final TextView txtPhoneNumber02;
         private final TextView txtBy;
         private final TextView txtType;
         private final TextView txtDateTime;
@@ -135,7 +137,8 @@ public class SMSAdapter extends RecyclerView.Adapter<SMSAdapter.ViewHolder> {
             super(itemView);
             cardStudent = itemView.findViewById(R.id.cardStudent);
             txtName = itemView.findViewById(R.id.txtName);
-            txtPhoneNumber = itemView.findViewById(R.id.txtPhoneNumber);
+            txtPhoneNumber01 = itemView.findViewById(R.id.txtPhoneNumber01);
+            txtPhoneNumber02 = itemView.findViewById(R.id.txtPhoneNumber02);
             txtType = itemView.findViewById(R.id.txtType);
             txtBy = itemView.findViewById(R.id.txtBy);
             txtMessage = itemView.findViewById(R.id.txtMessage);

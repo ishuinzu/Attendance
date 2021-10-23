@@ -74,7 +74,8 @@ public class UpdateStudentActivity extends AppCompatActivity implements View.OnC
                                     binding.edtStudentName.setText(student.getName());
                                     binding.edtRollNumber.setText(student.getRoll_number());
                                     binding.edtFatherName.setText(student.getFather_name());
-                                    binding.edtFatherPhoneNumber.setText(student.getFather_phone_number().substring(3));
+                                    binding.edtPhoneNumber01.setText(student.getPhone_number_01().substring(3));
+                                    binding.edtPhoneNumber02.setText(student.getPhone_number_02().substring(3));
                                     binding.edtAddress.setText(student.getAddress());
                                 }
                                 // Close Loading
@@ -111,7 +112,8 @@ public class UpdateStudentActivity extends AppCompatActivity implements View.OnC
         String name = binding.edtStudentName.getText().toString();
         String roll_number = binding.edtRollNumber.getText().toString();
         String father_name = binding.edtFatherName.getText().toString();
-        String father_phone_number = binding.edtFatherPhoneNumber.getText().toString();
+        String phone_number_01 = binding.edtPhoneNumber01.getText().toString();
+        String phone_number_02 = binding.edtPhoneNumber02.getText().toString();
         String address = binding.edtAddress.getText().toString();
 
         if (name.isEmpty()) {
@@ -123,16 +125,22 @@ public class UpdateStudentActivity extends AppCompatActivity implements View.OnC
         } else if (father_name.isEmpty()) {
             Toast.makeText(UpdateStudentActivity.this, "Father Name Required", Toast.LENGTH_SHORT).show();
             return;
-        } else if (father_phone_number.isEmpty()) {
-            Toast.makeText(UpdateStudentActivity.this, "Father Phone Number Required", Toast.LENGTH_SHORT).show();
+        } else if (phone_number_01.isEmpty()) {
+            Toast.makeText(UpdateStudentActivity.this, "Phone Number 01 Required", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (phone_number_02.isEmpty()) {
+            Toast.makeText(UpdateStudentActivity.this, "Phone Number 01 Required", Toast.LENGTH_SHORT).show();
             return;
         } else if (address.isEmpty()) {
             Toast.makeText(UpdateStudentActivity.this, "Address Required", Toast.LENGTH_SHORT).show();
             return;
-        } else if (father_phone_number.charAt(0) == '0') {
-            Toast.makeText(UpdateStudentActivity.this, "Remove First Digit (0) From Father's Phone Number", Toast.LENGTH_SHORT).show();
+        } else if (phone_number_01.charAt(0) == '0') {
+            Toast.makeText(UpdateStudentActivity.this, "Remove First Digit (0) From Phone Number 01", Toast.LENGTH_SHORT).show();
             return;
-        } else if (name.equals(student.getName()) && roll_number.equals(student.getRoll_number()) && father_name.equals(student.getFather_name()) && father_phone_number.equals(student.getFather_phone_number().substring(3)) && address.equals(student.getAddress())) {
+        } else if (phone_number_02.charAt(0) == '0') {
+            Toast.makeText(UpdateStudentActivity.this, "Remove First Digit (0) From Phone Number 02", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (name.equals(student.getName()) && roll_number.equals(student.getRoll_number()) && father_name.equals(student.getFather_name()) && phone_number_01.equals(student.getPhone_number_01().substring(3)) && phone_number_02.equals(student.getPhone_number_02().substring(3)) && address.equals(student.getAddress())) {
             Toast.makeText(UpdateStudentActivity.this, "No Changes", Toast.LENGTH_SHORT).show();
             return;
         } else {
@@ -147,7 +155,8 @@ public class UpdateStudentActivity extends AppCompatActivity implements View.OnC
             newStudent.setCreation(creation);
             newStudent.setFather_name(father_name);
             newStudent.setAddress(address);
-            newStudent.setFather_phone_number("+92" + father_phone_number);
+            newStudent.setPhone_number_01("+92" + phone_number_01);
+            newStudent.setPhone_number_02("+92" + phone_number_02);
 
             FirebaseDatabase.getInstance().getReference().child("student")
                     .child(department)
